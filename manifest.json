@@ -6,12 +6,12 @@
     "start_url": "index.html",
     "display": "standalone",
     "background_color": "#1E90FF",
-    "theme_color": "#00000",
+    "theme_color": "#FFFFFF",
     "icons": [
       {
-        "src": "Ai NOTE.svg",
+        "src": "Ai NOTE.png",
         "sizes": "192x192",
-        "type": "svg"
+        "type": "image/png"
       }
     ]
 }
