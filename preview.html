@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SmartNote AI - PDF Summarizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="server.js"></script>
+  <script type="module" src="SmartNote AI.js"></script>
+</head>
+<body class="bg-gray-100 p-6 font-sans">
+  <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="flex justify-between items-center mb-4">
+      <span id="userStatus" class="text-gray-700">Checking user...</span>
+      <div>
+        <button id="loginBtn" class="bg-blue-500 text-white px-3 py-1 rounded">Login with Google</button>
+        <button id="logoutBtn" class="bg-red-500 text-white px-3 py-1 rounded hidden">Logout</button>
+      </div>
+    </div>
+
+    <h1 class="text-2xl font-bold mb-4">Upload PDF to Summarize</h1>
+    <form id="upload-form" class="mb-4">
+      <input type="file" id="fileInput" accept=".pdf" class="hidden" required />
+      <div id="dropZone" class="border-2 border-dashed border-gray-400 rounded p-6 text-center cursor-pointer hover:border-blue-500 transition">
+        <p class="text-gray-600">Drag & drop a PDF here or click to select</p>
+      </div>
+      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded mt-4">Summarize</button>
+    </form>
+
+    <h2 class="text-xl font-semibold mt-6">Summary:</h2>
+    <pre id="summaryOutput" class="mt-2 bg-gray-100 p-4 rounded whitespace-pre-wrap">No summary yet.</pre>
+
+    <h2 class="text-xl font-semibold mt-6">Your Uploads:</h2>
+    <div id="uploadsList" class="mt-2 text-gray-700">Login to see your uploaded PDFs.</div>
+  </div>
+
+  <script type="module">
+    const fileInput = document.getElementById("fileInput");
+    const dropZone = document.getElementById("dropZone");
+    const summaryBox = document.getElementById("summaryOutput");
+    const uploadForm = document.getElementById("upload-form");
+
+    dropZone.addEventListener("click", () => fileInput.click());
+
+    ["dragenter", "dragover"].forEach(event => {
+      dropZone.addEventListener(event, e => {
+        e.preventDefault();
+        dropZone.classList.add("border-blue-600", "bg-blue-50");
+      });
+    });
+
+    ["dragleave", "drop"].forEach(event => {
+      dropZone.addEventListener(event, e => {
+        e.preventDefault();
+        dropZone.classList.remove("border-blue-600", "bg-blue-50");
+      });
+    });
+
+    dropZone.addEventListener("drop", e => {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      if (file && file.type === "application/pdf") {
+        fileInput.files = e.dataTransfer.files;
+      } else {
+        alert("Please drop a valid PDF file.");
+      }
+    });
+
+    uploadForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const file = fileInput.files[0];
+      if (!file) return alert("Please upload a PDF file.");
+
+      const user = window.auth.currentUser;
+      if (!user) return alert("You must be logged in to summarize a file.");
+
+      const filePath = `pdfs/${user.uid}/${Date.now()}_${file.name}`;
+      const storageRef = window.ref(window.storage, filePath);
+
+      summaryBox.textContent = "Uploading file and summarizing...";
+      await window.uploadBytes(storageRef, file);
+
+      const formData = new FormData();
+      formData.append("pdf", file);
+
+      const res = await fetch("http://localhost:5000/summarize", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      summaryBox.textContent = data.summary;
+
+      // Refresh upload list
+      const uploadsList = document.getElementById("uploadsList");
+      uploadsList.innerHTML = "Refreshing...";
+      const userRef = window.ref(window.storage, `pdfs/${user.uid}`);
+      const resList = await window.listAll(userRef);
+      const links = await Promise.all(
+        resList.items.map(async item => {
+          const url = await window.getDownloadURL(item);
+          return `<li class='flex justify-between items-center'>
+            <a href='${url}' target='_blank' class='text-blue-600 underline'>${item.name}</a>
+            <button data-path='${item.fullPath}' class='delete-btn text-red-500 text-sm ml-4'>Delete</button>
+          </li>`;
+        })
+      );
+      uploadsList.innerHTML = `<ul class="list-disc pl-5 space-y-2">${links.join("")}</ul>`;
+
+      document.querySelectorAll('.delete-btn').forEach(button => {
+        button.onclick = async () => {
+          const path = button.dataset.path;
+          if (confirm(`Delete file ${path}?`)) {
+            await window.deleteObject(window.ref(window.storage, path));
+            uploadsList.innerHTML = "Updating list...";
+            const updateList = await window.listAll(window.ref(window.storage, `pdfs/${user.uid}`));
+            const updateLinks = await Promise.all(
+              updateList.items.map(async item => {
+                const url = await window.getDownloadURL(item);
+                return `<li class='flex justify-between items-center'>
+                  <a href='${url}' target='_blank' class='text-blue-600 underline'>${item.name}</a>
+                  <button data-path='${item.fullPath}' class='delete-btn text-red-500 text-sm ml-4'>Delete</button>
+                </li>`;
+              })
+            );
+            uploadsList.innerHTML = `<ul class="list-disc pl-5 space-y-2">${updateLinks.join("")}</ul>`;
+          }
+        };
+      });
+    });
+  </script>
+</body>
+</html>

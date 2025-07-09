@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="website icon" href="AI NOTE.svg" type="svg">
+    <title>SmartNote | Log in</title>
+    <script src="auth.js"></script>
+</head>
+<style>
+    .div{
+            display: none;
+        }
+
+        
+
+        @media screen and (max-width:450px) {
+            .body{
+                color: white;
+                margin: 0%;
+                overflow: hidden;
+                
+            }
+
+            .div{
+                margin-top: 10%;
+                display: block;
+            }
+
+            .logo{
+                width: 40%;
+                height: 150px;
+                margin-left: 30%;
+                margin-right: 30%;
+            }
+
+            .h1{
+                
+                color: black;
+                font-size: 25px;
+                text-align: center;
+                color: rgb(55, 55, 241);
+                margin-top: opx;
+
+                
+            }
+
+            .email{
+                padding: 15px;
+                width: 90%;
+                border-style:inherit;
+                border-color: rgb(55, 55, 241);
+                border-radius: 5px;
+                background-color: rgb(245, 245, 245);
+                font-size: 15px;
+                outline-color: rgb(30, 144, 255);
+
+            }
+
+            .password{
+                padding: 15px;
+                width: 90%;
+                border-style:inherit;
+                border-color: rgb(55, 55, 241);
+                border-radius: 5px;
+                background-color: rgb(245, 245, 245);
+                font-size: 15px;
+                outline-color: rgb(30, 144, 255);
+            }
+
+            .button{
+                color: rgb(255, 255, 255);
+                background-color: rgb(30, 144, 255);
+                border-radius: 10px;
+                border-style: none;
+                padding: 15px;
+                width: 95%;
+                margin-left: 1.5%;
+                margin-right: 1.5%;
+                margin-top: 10%;
+                font-size: 15px;
+                
+                
+                
+
+            }
+            .p{
+                text-align: center;
+            }
+            .btn{
+                color: rgb(10, 10, 10);
+                background-color: rgb(252, 252, 252);
+                border-radius: 10px;
+                border-style:ridge;
+                border-color: rgb(206, 211, 209);
+                border-width: thin;
+                padding: 10px;
+                width: 95%;
+                margin-left: 1.5%;
+                margin-right: 1.5%;
+                margin-top: 5%;
+                font-size: 15px;
+
+            }
+            .svg{
+            
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+                
+            }
+
+            .blur{
+                    width: 100%;
+                    height: 900px;
+                    position:absolute;
+                    background-color: rgba(0, 0, 0, 0.623);
+                    display:none;
+                    top: 0%;
+                    left: 0%;
+                    overflow-x: hidden;
+                    
+                }
+                .Signup{
+                    margin-left: 5%;
+                    width: 90%;
+                    height: 500px;
+                    background-color: rgb(255, 255, 255);
+                    border-radius: 10px;
+                    padding-top: 10px;
+                    margin-top: 100px;
+                }
+
+                .text{
+                    padding: 15px;
+                    width: 85%;
+                    margin-left: 2%;
+                    border-style:inherit;
+                    border-color: rgb(55, 55, 241);
+                    border-radius: 5px;
+                    background-color: rgb(245, 245, 245);
+                    font-size: 15px;
+                    outline-color: rgb(30, 144, 255);
+
+                }
+
+
+                .Mainlogo{
+                    width: 40%;
+                    height: 150px;
+                    margin-left: 30%;
+                    margin-right: 30%;
+                }
+        }
+
+                
+</style>
+<script>
+
+    function Signup(){
+        document.getElementById("blur").style.display = "block"
+    }
+    </script>
+<body>
+
+        <!--Signup-->
+        <div>
+            <div class="blur" id="blur" >
+                <div class="Signup">
+                <img src="AI NOTE.svg" class="Mainlogo"><br>
+                <form style="margin-top: 10%; "  id="signup-form">
+                    <p style=" margin-left: 2%;"><b>Email</b></p>
+                    <input type="email" placeholder="Email" class="text" id="signup-email"> 
+                    <p style=" margin-left: 2%;"><b>Password</b></p>
+                    <input type="password" class="text" id="signup-password" placeholder="create password">
+                    <button  class="button" onclick="signup()">Created Account</button>
+                    <p class="p">Already havee an Account</p>
+                </form>
+                </div>
+            </div>
+        </div>
+
+    <!--Login-->
+    <div class="div">
+        <img src="AI NOTE.svg" class="logo">
+        <h2>Log in</h2>
+        <form id="login-form">
+        <p><b>Email</b></p>
+        <input type="email" class="email" placeholder="Email" id="login-email">
+        <p><b>Password</b></p>
+        <input type="password" class="password" placeholder="password" id="login-password">
+        <button class="button"><b>Log In</b></button>
+        </form>
+        <p class="p">Create an Account</p>
+        <button class="btn" onclick="Signup()"><img src="profile-svgrepo-com.svg" class="svg" >Sign up with Email and password</button>
+        <button class="btn" onclick="LogWithGoogle()"><img src="google.svg" class="svg">Continue in with Google</button>
+        <button class="btn" ><img src="microsoft.svg" class="svg">Continue in with Microsoft</button>
+    </div>
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+        import{ getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js"
+        
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+    
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAs-woLjwy4BhQzyutYh8I2h3-jzhe_kY4",
+          authDomain: "smartnote-ai-d2dd1.firebaseapp.com",
+          projectId: "smartnote-ai-d2dd1",
+          storageBucket: "smartnote-ai-d2dd1.firebasestorage.app",
+          messagingSenderId: "982239102580",
+          appId: "1:982239102580:web:0f38bccf724cf6e5a17321",
+          measurementId: "G-79Y1C2GMLC"
+        };
+      
+        // Initialize Firebase
+        
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app)
+        
+
+        // make
+        let db = app.firebase();
+
+        db.settings({timestampsInSnapshots: true});
+
+        //sigh with email and password
+        
+
+
+        // signup with google
+        function LogWithGoogle(){
+
+            const auth = getAuth();
+            const provider = new GoogleAuthProvider();
+
+            signInWithPOPup(auth, provider).then((result) => {
+                const user = result.user;
+                console.log("user:", user)
+            })
+            .catch((error) => { 
+                console.log("error signing in")
+            })
+    }
+    
+      </script>
+
+
+
+</body>
+</html>

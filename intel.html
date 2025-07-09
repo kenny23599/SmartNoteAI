@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PDF Summarizer</title>
+</head>
+<body>
+  <h1>Upload PDF to Summarize</h1>
+  <form id="upload-form">
+    <input type="file" id="fileInput" accept=".pdf" required />
+    <button type="submit">Summarize</button>
+  </form>
+
+  <h2>Summary:</h2>
+  <pre id="summaryOutput">No summary yet.</pre>
+
+  <script>
+    document.getElementById("upload-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const file = document.getElementById("fileInput").files[0];
+      const formData = new FormData();
+      formData.append("pdf", file);
+
+      const res = await fetch("http://localhost:5000/summarize", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      document.getElementById("summaryOutput").textContent = data.summary;
+    });
+  </script>
+</body>
+</html>

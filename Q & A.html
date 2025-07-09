@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q & A  | SmartNote</title>
+    <link rel="website icon" href="AI NOTE.svg" type="svg">
+</head>
+
+
+<style>
+    .div{
+            display: none;
+        }
+        
+
+        @media screen and (max-width:450px) {
+            .body{
+                background-color: rgb(255, 255, 255);
+                color: rgb(0, 0, 0);
+                margin: 0%;
+                overflow:hidden;
+            }
+
+            .div{
+                margin-top: 10%;
+                display: block;
+            }
+
+            .h1{
+                
+                color: black;
+                font-size: 25px;
+                text-align: left;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin-left: 3%;
+                margin-top: 40px;
+                margin-bottom: 20px;
+                
+            }
+
+            .logo{
+                width: 20%;
+                height: 40px;
+                float: right;
+                margin-right: 3%;
+                margin-bottom: 20px;
+            }
+
+            .Search{
+                background-color: white;
+                border-color: rgb(177, 177, 177);
+                border-style:ridge;
+                border-width: thin;
+                border-radius: 7px;
+                width: 83%;
+                padding: 15px;
+                margin-left: 15px;
+                background-image: url(send-2-svgrepo-com.svg);
+                outline-color: rgb(30, 144, 255);
+                
+            }
+            .container{
+                background-color: white;
+                box-shadow: 1px 1px 3px 2px rgb(223, 223, 223);
+                border-color: rgb(177, 177, 177);
+                border-radius: 10px;
+                width: 90%;
+                height: 100px;
+                margin-left: 5%;
+                margin-top: 20px;
+                padding-top: 1%;
+            }
+
+            .svg{
+                width: 40%;
+                height: 80px;
+                margin-left: 30%;
+                margin-top: 10px;
+            
+        }
+
+            .p{
+                text-align: left;
+                font-family:  'Lato', sans-serif;;
+                font-size: large;
+                margin-left: 5%;
+                
+                
+            }
+
+            .span{
+                color: rgb(187, 187, 187);
+                margin-left: 5%;
+            }
+
+            .navbar{
+                width: 100%;
+                height: 7vh;
+                box-shadow: 1px 1px 3px 2px rgb(223, 223, 223);
+                background-color: rgb(255, 255, 255);
+                position: fixed;
+                bottom: 0;
+                border-top-left-radius:  15px;
+                border-top-right-radius: 15px;
+                display: grid;
+                grid-template-columns: 25% 25% 25% 25%;
+            }
+            .nav-icon{
+                width: 100%;
+                height: 4vh;
+                margin-top: 10%;
+            }
+
+            .back-icon{
+                width: 10%;
+                height: 3vh;
+                float: left;
+                margin-left: 2%;
+            }
+        }
+</style>
+<body class="body" >
+    
+
+    <div class="div" id="div">
+        <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Dashboard.html'">
+        <img src="AI NOTE.svg" class="logo"><br>
+        <h1 class="h1">Pass Q&A</h1>
+        <input type="text" class="Search" placeholder="Search for PQ" id="mySearch"  onkeyup="myFunction()">
+
+        
+
+        <div style="height: 500px; overflow-y: scroll;">
+            <ul id="myMenu" style="display:contents;list-style-type: none;">
+
+            <li><a href="#" style="color: black; text-decoration: none;" >
+            <div class="container">
+                <p class="p"><b>CSC101 PQ</b></p><span class="span">Summary History</span>
+            </div>
+            </a>
+
+            <li><a href="#" style="color: black; text-decoration: none;" >
+            <div class="container">
+                <p class="p"><b>MTH101 PQ</b></p><span class="span">Summary History</span>
+            </div>
+            </a>
+
+            <li><a href="#" style="color: black; text-decoration: none;" >
+            <div class="container">
+                <p class="p"><b>CSC101 PQ</b></p><span class="span">Summary History</span>
+            </div>
+            </a>
+
+            <li><a href="#" style="color: black; text-decoration: none;" >
+            <div class="container">
+                <p class="p"><b>MTH101 PQ</b></p><span class="span">Summary History</span>
+            </div>
+            </a>
+
+            <li><a href="#" style="color: black; text-decoration: none;" >
+            <div class="container">
+                <p class="p"><b>CSC101 PQ</b></p><span class="span">Summary History</span>
+            </div>
+            </a>
+
+            <li><a href="#" style="color: black; text-decoration: none;" >
+            <div class="container">
+                <p class="p"><b>MTH101 PQ</b></p><span class="span">Summary History</span>
+            </div>
+            </a>
+
+            <li><a href="#" style="color: black; text-decoration: none;" >
+            <div class="container">
+                <p class="p"><b>CSC101 PQ</b></p><span class="span">Summary History</span>
+            </div>
+            </a>
+
+            <li><a href="#" style="color: black; text-decoration: none;" >
+            <div class="container">
+                <p class="p"><b>MTH101 PQ</b></p><span class="span">Summary History</span>
+            </div>
+            </a>
+
+        </u>
+        </div>
+
+        <div class="navbar">
+            <div><img src="profile-svgrepo-com.svg" class="nav-icon" onclick="document.location = 'dashboard.html'"></div>
+            <div><img src="historical-sumary-svgrepo-com.svg" class="nav-icon" onclick="document.location = 'Summary.html'"></div>
+            <div><img src="chat-round-svgrepo-com NEW.svg" class="nav-icon" onclick="document.location = 'ChatAI.html'"></div>
+            <div><img src="inbox-svgrepo-com NEW.svg" class="nav-icon" onclick="document.location = 'Courses.html'"></div>
+            
+        </div>
+
+
+
+
+    </div>
+    <script>
+        function openSearch(){
+            document.getElementById("text").style.display = "none";
+            document.getElementById("mySearch").style.display = "block";
+            document.getElementById("mySearch").focus();
+
+        } 
+
+        function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("mySearch");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myMenu");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+                } else {
+                li[i].style.display = "none";
+                }
+            }
+            }
+    </script>
+    
+</body>
+</html>

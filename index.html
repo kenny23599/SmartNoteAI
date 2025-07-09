@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="website icon" href="AI NOTE.svg" type="svg">
+    <link rel="stylesheet" href="app.css">
+    <title>SmartNote AI</title>
+</head>
+<style>
+     .div{
+            display: none;
+            margin: 0%;
+        }
+        
+
+        @media screen and (max-width:450px) {
+            .body{
+                background-color: rgb(30, 144, 255);
+                color: white;
+            }
+
+            .div{
+                margin-top: 20%;
+                display: block;
+                overflow: scroll;
+            }
+
+            .logo{
+                width: 60%;
+                height: 200px;
+                margin-left: 20%;
+                margin-right: 20%;
+            }
+
+            .h1{
+                
+                color: black;
+                font-size: 45px;
+                text-align: center;
+                color: rgb(55, 55, 241);
+                margin-top: opx;
+
+                
+            }
+
+            .h2{
+                color: rgb(255, 255, 255);
+                font-size: x-large;
+                font-family: 'Roboto', sans-serif;
+                width: 90%;
+                margin-left: 5%;
+                margin-right: 5%;
+                text-align: center;
+                margin-bottom: 20px;
+                
+            }
+
+            .p{
+                color: rgb(255, 255, 255);
+                font-size: 13px;
+                text-align: center;
+                width: 90%;
+                margin-left: 5%;
+                margin-right: 5%;
+                margin-bottom: 50px;
+                font-family: 'Lato', sans-serif;
+            
+            }
+            .button{
+                color: rgb(30, 144, 255);
+                background-color: rgb(255, 255, 255);
+                border-radius: 10px;
+                border-style: none;
+                padding: 15px;
+                width: 90%;
+                margin-left: 5%;
+                margin-right: 5%;
+                font-size: 15px;
+                
+
+            }
+            .dsk{
+                display: none;
+            }
+
+
+            @keyframes svg{
+                from{margin-left: -70%;}
+                to{margin-left: 10%;}
+            }
+
+            .illustration{
+                width: 80%;
+                height: 350px;
+                margin-left: 10%;
+                margin-right: 10%;
+                animation-name: svg;
+                animation-duration: 3s;
+            }
+
+          
+                
+                
+            .dsk{
+                display: none;
+            }
+        }
+</style>
+<body class="body">
+    <div class="div">
+    <img src="woman.png" class="illustration">
+    <h2 class="h2"><b>SmartNote AI</b></h2>
+    <p class="p">Struggling with last-minute exam prep or making sense of lecture slides? SmartNotes AI is built for students like you. Our tool uses advanced AI to summarize your lecture notes.</p>
+    <button class="button" onclick="document.location ='log_in.html'"><b>Get Started</b></button>
+    </div>
+</body>
+</html>

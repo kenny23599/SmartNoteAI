@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses | SmartNote</title>
+    <link rel="website icon" href="AI NOTE.svg" type="svg">
+    <script type="module" src="SmartNote AI.js"></script>
+
+</head>
+<style>
+    .div{
+            display: none;
+        }
+        
+
+        @media screen and (max-width:450px) {
+            .body{
+                background-color: rgb(255, 255, 255);
+                color: rgb(0, 0, 0);
+                margin: 0%;
+            }
+
+            .div{
+                margin-top: 10%;
+                display: block;
+            }
+
+            .h1{
+                
+                color: black;
+                font-size: 25px;
+                text-align: left;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin-left: 3%;
+                margin-top: 40px;
+                margin-bottom: 20px;
+                
+            }
+
+            .logo{
+                width: 20%;
+                height: 40px;
+                float: right;
+                margin-right: 3%;
+                margin-bottom: 20px;
+            }
+
+            .button{
+                color: rgb(255, 255, 255);
+                background-color: rgb(30, 144, 255);
+                border-radius: 10px;
+                border-style: none;
+                padding: 15px;
+                width: 94%;
+                margin-left: 3%;
+                margin-right: 3%;
+                font-family: 'Lato', sans-serif;
+                font-size: 15px;
+                
+            }
+            .container{
+                background-color: white;
+                box-shadow: 1px 1px 3px 2px rgb(223, 223, 223);
+                border-color: rgb(177, 177, 177);
+                border-radius: 10px;
+                width: 90%;
+                height: 100px;
+                margin-left: 5%;
+                margin-top: 30px;
+            }
+
+            .svg{
+                width: 40%;
+                height: 80px;
+                margin-left: 30%;
+                margin-top: 10px;
+            
+        }
+
+            .p{
+                text-align: left;
+                font-family:  'Lato', sans-serif;;
+                font-size: large;
+                margin-left: 5%;
+            }
+
+            .span{
+                color: rgb(187, 187, 187);
+                margin-left: 5%;
+            }
+
+            .navbar{
+                width: 100%;
+                height: 7vh;
+                box-shadow: 1px 1px 3px 2px rgb(223, 223, 223);
+                background-color: rgb(255, 255, 255);
+                position: fixed;
+                bottom: 0;
+                border-top-left-radius:  15px;
+                border-top-right-radius: 15px;
+                display: grid;
+                grid-template-columns: 25% 25% 25% 25%;
+            }
+            .nav-icon{
+                width: 100%;
+                height: 4vh;
+                margin-top: 10%;
+            }
+
+            .back-icon{
+                width: 10%;
+                height: 3vh;
+                float: left;
+                margin-left: 2%;
+            }
+        }
+            .blur{
+                width: 100%;
+                height: 900px;
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.623);
+                display:none;
+                overflow: hidden;
+                top: 0%;
+                }
+                .addcourse{
+                    margin-left: 5%;
+                    width: 90%;
+                    height: 500px;
+                    background-color: rgb(255, 255, 255);
+                    border-radius: 10px;
+                    padding-top: 10px;
+                    margin-top: 100px;
+                }
+
+                .text{
+                    padding: 15px;
+                    width: 85%;
+                    margin-left: 2%;
+                    border-style:inherit;
+                    border-color: rgb(55, 55, 241);
+                    border-radius: 5px;
+                    background-color: rgb(245, 245, 245);
+                    font-size: 15px;
+                    outline-color: rgb(30, 144, 255);
+
+                }
+
+                .CourseSelection{
+                    width: 40%;
+                    padding: 15px;
+                    border-style: none;
+                    border-radius: 10px;
+                    color: rgb(30, 144, 255);;
+                    background-color: rgb(245, 245, 245);;
+                    cursor: pointer;
+                    margin-right: 2%;
+                    margin-bottom: 5%;
+                    margin-top: 5%;
+                    outline: none;
+                    
+                    }
+                .Mainlogo{
+                    width: 40%;
+                    height: 150px;
+                    margin-left: 30%;
+                    margin-right: 30%;
+                }
+
+                .svgup{
+                width: 20%;
+                height: 30px;
+                margin-top: 10px;
+                
+            
+        }
+</style>
+<body class="body">
+
+    <div class="blur" id="blur" onclick="blur()">
+        <div class="addcourse">
+        <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Courses.html'">
+        <img src="AI NOTE.svg" class="Mainlogo"><br>
+        <form style="margin-top: 10%; " id="form">
+            <p><b style=" margin-left: 2%;">Course Title</b></p>
+            <input type="text" placeholder="course title" class="text" id="text">
+            <div style="margin-left: 2%;" id="customButton"> 
+            <input type="file" accept=".pdf" class="hidden" id="fileInput" style="display: none;" required >
+            Select File:
+            <img src="upload-svgrepo-com (1).svg" class="svgup">
+            <select class="CourseSelection" >
+                <option>Technology</option>
+                <option>Economics</option>
+                <option>Business</option>
+            </select>
+            </div>
+            <button onclick="AddCoursebtn()" class="button">Add Course</button>
+        </form>
+        
+        </div>
+    </div>
+    
+
+    <div class="div" id="div">
+        <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Dashboard.html'">
+        <img src="AI NOTE.svg" class="logo"><br>
+        <h1 class="h1">Course</h1>
+        <button class="button" onclick="AddCourse()">Add Course</button>
+
+        <div style="display: flex; flex-wrap:wrap;">
+            <div class="container" id="uploadsList">
+                <p class="p" id="Course"><b >CSC101</b></p>
+                <span class="span" id="filename">Summary History</span>
+            </div>
+
+            <div class="container" id="uploadsList">
+                <p class="p"><b>MTH101</b></p><span class="span">Summary History</span>
+            </div>
+
+        </div>
+
+        <div class="navbar">
+            <div><img src="profile-svgrepo-com.svg" class="nav-icon" onclick="document.location = 'dashboard.html'"></div>
+            <div><img src="historical-sumary-svgrepo-com.svg" class="nav-icon" onclick="document.location = 'Summary.html'"></div>
+            <div><img src="chat-round-svgrepo-com NEW.svg" class="nav-icon" onclick="document.location = 'ChatAI.html'"></div>
+            <div><img src="inbox-svgrepo-com (1) BLUE.svg" class="nav-icon" onclick="document.location = 'Courses.html'"></div>
+            
+        </div>
+<script>
+    function blur(){
+        document.getElementById("blur").style.display = "none";
+        
+        
+        
+        
+    }
+    function AddCourse(){
+        document.getElementById("blur").style.display = "block"
+        
+        
+    }
+
+    
+            document.getElementById("customButton").addEventListener("click", () => {
+            
+            document.getElementById("fileInput").click();
+        });
+    
+        document.getElementById("upload-form").addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const file = document.getElementById("fileInput").files[0];
+          if (!file) {
+            alert("Please select a file first.");
+            return;
+
+            
+          }
+          
+
+          AddCoursebtn()
+        });
+
+        const ducform = document.querySelector("#form")
+
+        duc.addEventListener('submit', (e) =>{
+            e.preventDefault();
+            AddCoursebtn()
+        })
+
+        
+
+    function AddCoursebtn(){
+        let Fileinput = document.getElementById('fileInput')
+        let uploadedFile = document.getElementById('customButton')
+        let CourseName = document.getElementById('text')
+        
+        
+        const UpName = CourseName.value
+
+        
+            
+            if (Fileinput.files.length > 0){
+                uploadedFile.innerText = "Uploaded file: " + Fileinput.files[0].name
+                document.getElementById("blur").style.display = "none";
+            }
+            else{
+                Fileinput.innerText= "No File selected"
+            }
+
+            console.log(CourseName.value)
+            console.log(Fileinput.files[0].name)
+            return Fileinput.files[0].name
+            
+            
+    }
+
+      
+</script>
+
+
+    </div>
+
+
+
+    
+</body>
+</html>
