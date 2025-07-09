@@ -1,17 +1,17 @@
 
 {
-    "name": "SmartNote AI",
-    "short_name": "SmartNote AI",
-    "description": "Education",
-    "start_url": "index.html",
-    "display": "standalone",
-    "background_color": "#1E90FF",
-    "theme_color": "#FFFFFF",
-    "icons": [
-      {
-        "src": "Ai NOTE.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      }
-    ]
-}
+      "name": "SmartNote AI",
+      "short_name": "SmartNote AI",
+      "description": "Education",
+      "start_url": "index.html",
+      "display": "standalone",
+      "background_color": "#FFFFFF",
+      "theme_color": "#FFFFFF",
+      "icons": [
+        {
+          "src": "AI NOTE.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
