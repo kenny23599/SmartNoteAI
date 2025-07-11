@@ -117,13 +117,8 @@
 <body class="body">
     <div class="div" id="div">
         <img src="AI NOTE.svg" class="logo">
-            <div id="userInfo" class="hidden">
-      <img id="userPhoto" class="w-16 h-16 rounded-full mx-auto mb-2" />
-      <p><strong>Name:</strong> <span id="userName"></span></p>
-      <p><strong>Email:</strong> <span id="userEmail"></span></p>
-      <button id="logoutBtn" class="mt-4 text-red-500 underline">Logout</button>
-    </div>
-  </div>
+        <img class="profile" id="userPhoto">
+        <p><strong>Name:</strong> <span id="userName"></span></p>
         <h1 class="h1">Dashboard</h1>
         <button class="button" id="loginBtn">Upload notes</button>
 
@@ -189,8 +184,9 @@
 
     onAuthStateChanged(auth, user => {
       if (user) {
-        
-
+        userInfo.classList.add("hidden");
+        loginBtn.style.display = "block";
+          
         userName.textContent = user.displayName;
         userEmail.textContent = user.email;
         userPhoto.src = user.photoURL;
