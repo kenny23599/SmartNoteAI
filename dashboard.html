@@ -118,7 +118,7 @@
     <div class="div" id="div">
         <img src="AI NOTE.svg" class="logo">
         <div id="userInfo" class="hidden">
-        <img class="profile" id="userPhoto" src="profile-svgrepo-com (1)BLUE.svg">
+        <img class="profile" id="userPhoto" >
         <p ><strong>Name:</strong> <span id="userName"></span></p>
         </div>
         <h1 class="h1">Dashboard</h1>
@@ -185,7 +185,7 @@
 
     onAuthStateChanged(auth, user => {
       if (user) {
-        loginBtn.style.display = "none";
+        loginBtn.style.display = "block";
         userInfo.classList.remove("hidden");
 
         userName.textContent = user.displayName;
