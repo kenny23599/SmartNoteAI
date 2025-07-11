@@ -200,7 +200,7 @@
     onAuthStateChanged(auth, user => {
       if (user) {
         loginBtn.style.display = "block";
-        userInfo.classList.remove("hidden");
+        userInfo.classList.add("hidden");
 
         userName.textContent = user.displayName;
         userEmail.textContent = user.email;
