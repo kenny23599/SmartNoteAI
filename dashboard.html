@@ -117,8 +117,10 @@
 <body class="body">
     <div class="div" id="div">
         <img src="AI NOTE.svg" class="logo">
-        <img class="profile" id="userPhoto">
-        <p><strong>Name:</strong> <span id="userName"></span></p>
+        <div id="userInfo" class="hidden">
+        <img class="profile" id="userPhoto" src="profile-svgrepo-com (1)BLUE.svg">
+        <p ><strong>Name:</strong> <span id="userName"></span></p>
+        </div>
         <h1 class="h1">Dashboard</h1>
         <button class="button" id="loginBtn">Upload notes</button>
 
@@ -184,8 +186,8 @@
 
     onAuthStateChanged(auth, user => {
       if (user) {
-        userInfo.classList.add("hidden");
-        loginBtn.style.display = "block";
+        loginBtn.style.display = "none";
+        userInfo.classList.remove("hidden")
           
         userName.textContent = user.displayName;
         userEmail.textContent = user.email;
