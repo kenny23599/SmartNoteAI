@@ -24,7 +24,7 @@
                 display: block;
             }
 
-            .profile{
+.profile{
                 width: 10%;
                 height: 38px;
                 border-radius: 50%;
@@ -34,6 +34,8 @@
                 border-color: rgb(30, 144, 255);
                 margin-left: 3%;
                 margin-right: 2%;
+                float: left;
+                
 
             }
 
@@ -45,7 +47,6 @@
                 margin-top: opx;
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
                 margin-left: 3%;
-                
                 
             }
 
@@ -113,15 +114,28 @@
                 margin-top: 10%;
             }
         }
+
+        .userName{
+            color: black;
+            float: left;
+        }
 </style>
 <body class="body">
+
+    
+
     <div class="div" id="div">
-        <img src="AI NOTE.svg" class="logo">
+
         <div id="userInfo" class="hidden">
-        <img class="profile" id="userPhoto" >
-        <p ><strong>Name:</strong> <span id="userName"></span></p>
-        </div>
         <h1 class="h1">Dashboard</h1>
+        <img src="AI NOTE.svg" class="logo">
+        <img class="profile" id="userPhoto" src="profile-svgrepo-com (1)BLUE.svg">
+        <p class="userName"><strong id="userName"></strong></p>
+        </div>
+
+        <div>
+        
+        
         <button class="button" id="loginBtn">Upload notes</button>
 
         <div style="display: flex; flex-wrap:wrap;">
