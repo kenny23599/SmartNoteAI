@@ -186,7 +186,6 @@
 
     onAuthStateChanged(auth, user => {
       if (user) {
-        loginBtn.style.display = "none";
         userInfo.classList.remove("hidden")
           
         userName.textContent = user.displayName;
