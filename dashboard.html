@@ -153,6 +153,7 @@
             <div><img src="inbox-svgrepo-com NEW.svg" class="nav-icon" onclick="document.location = 'Courses.html'"></div>
             
         </div>
+    </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
@@ -186,8 +187,9 @@
 
     onAuthStateChanged(auth, user => {
       if (user) {
-        userInfo.classList.remove("hidden")
-          
+        loginBtn.style.display = "none";
+        userInfo.classList.remove("hidden");
+
         userName.textContent = user.displayName;
         userEmail.textContent = user.email;
         userPhoto.src = user.photoURL;
@@ -198,7 +200,5 @@
     });
   </script>
 
-
-    </div>
 </body>
 </html>
