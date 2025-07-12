@@ -207,16 +207,16 @@
     const userName = document.getElementById("userName");
     const userEmail = document.getElementById("userEmail");
     const userPhoto = document.getElementById("userPhoto");
-    const dashboard = document.location
+    
 
     loginBtn.onclick = () => signInWithPopup(auth, provider);
-      
+    logoutBtn.onclick = () => signOut(auth);  
 
     
 
     onAuthStateChanged(auth, user => {
       if (user) {
-        loginBtn.style.display = "block";
+        loginBtn.style.display = "none";
         userInfo.classList.remove("hidden");
 
         userName.textContent = user.displayName;
@@ -228,7 +228,7 @@
       } else {
         loginBtn.style.display = "block";
         userInfo.classList.add("hidden");
-        document.location = 'log_in.html'
+        
       }
     });
   </script>
