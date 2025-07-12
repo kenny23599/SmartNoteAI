@@ -173,48 +173,7 @@
         </div>
     </div>
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-    // ✅ Paste your Firebase config below:
-    const firebaseConfig = {
-  apiKey: "AIzaSyAs-woLjwy4BhQzyutYh8I2h3-jzhe_kY4",
-  authDomain: "smartnote-ai-d2dd1.firebaseapp.com",
-  projectId: "smartnote-ai-d2dd1",
-  storageBucket: "smartnote-ai-d2dd1.firebasestorage.app",
-  messagingSenderId: "982239102580",
-  appId: "1:982239102580:web:0f38bccf724cf6e5a17321",
-  measurementId: "G-79Y1C2GMLC"
-};
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const userInfo = document.getElementById("userInfo");
-    const userName = document.getElementById("userName");
-    const userEmail = document.getElementById("userEmail");
-    const userPhoto = document.getElementById("userPhoto");
-
-    loginBtn.onclick = () => signInWithPopup(auth, provider);
-
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        loginBtn.style.display = "block";
-        userInfo.classList.add("hidden");
-
-        userName.textContent = user.displayName;
-        userEmail.textContent = user.email;
-        userPhoto.src = user.photoURL;
-      } else {
-        loginBtn.style.display = "block";
-        userInfo.classList.add("hidden");
-      }
-    });
-  </script>
 
 </body>
 </html>
