@@ -155,104 +155,84 @@
 
                 
 </style>
-<script>
-
-    function Signup(){
-        document.getElementById("blur").style.display = "block"
-    }
-    </script>
+<script src="https://cdn.tailwindcss.com"></script>
 <body>
-
+    
+    
         <!--Signup-->
-        <div>
-            <div class="blur" id="blur" >
-                <div class="Signup">
-                <img src="AI NOTE.svg" class="Mainlogo"><br>
-                <form style="margin-top: 10%; "  id="signup-form">
-                    <p style=" margin-left: 2%;"><b>Email</b></p>
-                    <input type="email" placeholder="Email" class="text" id="signup-email"> 
-                    <p style=" margin-left: 2%;"><b>Password</b></p>
-                    <input type="password" class="text" id="signup-password" placeholder="create password">
-                    <button  class="button" onclick="signup()">Created Account</button>
-                    <p class="p">Already havee an Account</p>
-                </form>
-                </div>
-            </div>
-        </div>
 
     <!--Login-->
     <div class="div">
-        <img src="AI NOTE.svg" class="logo">
-        <h2>Log in</h2>
-        <form id="login-form">
-        <p><b>Username</b></p>
-        <input type="email" class="email" placeholder="Email" id="login-email">
-        <p><b>Password</b></p>
-        <input type="password" class="password" placeholder="password" id="login-password">
-        <button class="button"  ><b>Log In</b></button>
-        </form>
-        <p class="p">Create an Account</p>
-        <button class="btn" onclick="Signup()"><img src="profile-svgrepo-com.svg" class="svg" >Sign up with Email and password</button>
-        <button class="btn"  id="loginBtn" ><img src="google.svg" class="svg">Continue in with Google</button>
-        <button class="btn" ><img src="microsoft.svg" class="svg">Continue in with Microsoft</button>
+    <body class="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <img src="AI NOTE.svg" class="logo">
+    <div class="bg-white p-8 rounded shadow w-full max-w-sm text-center">
+    <h2 class="text-xl font-bold mb-4">Login with Google</h2>
+
+    <button id="loginBtn" class="bg-blue-600 text-white px-4 py-2 rounded mb-4">
+      Sign in with Google
+    </button>
     </div>
 
+    <div id="userInfo" class="hidden">
+      <img id="userPhoto" class="w-16 h-16 rounded-full mx-auto mb-2" />
+      <p><strong>Name:</strong> <span id="userName"></span></p>
+      <p><strong>Email:</strong> <span id="userEmail"></span></p>
+      <button id="logoutBtn" class="mt-4 text-red-500 underline">Logout</button>
+    </div>
+  </div>
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
-        import{ getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js"
-        
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-        
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
     
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyAs-woLjwy4BhQzyutYh8I2h3-jzhe_kY4",
-          authDomain: "smartnote-ai-d2dd1.firebaseapp.com",
-          projectId: "smartnote-ai-d2dd1",
-          storageBucket: "smartnote-ai-d2dd1.firebasestorage.app",
-          messagingSenderId: "982239102580",
-          appId: "1:982239102580:web:0f38bccf724cf6e5a17321",
-          measurementId: "G-79Y1C2GMLC"
-        };
-      
-        // Initialize Firebase
-        
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app)
-        
+    const firebaseConfig = {
+        apiKey: "AIzaSyAs-woLjwy4BhQzyutYh8I2h3-jzhe_kY4",
+        authDomain: "smartnote-ai-d2dd1.firebaseapp.com",
+        projectId: "smartnote-ai-d2dd1",
+        storageBucket: "smartnote-ai-d2dd1.firebasestorage.app",
+        messagingSenderId: "982239102580",
+        appId: "1:982239102580:web:0f38bccf724cf6e5a17321",
+        measurementId: "G-79Y1C2GMLC"       
+};
 
-        // make
-        let db = app.firebase();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
-        db.settings({timestampsInSnapshots: true});
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const userInfo = document.getElementById("userInfo");
+    const userName = document.getElementById("userName");
+    const userEmail = document.getElementById("userEmail");
+    const userPhoto = document.getElementById("userPhoto");
+    const dashboard = document.location()
 
-        //sigh with email and password
-        
+    loginBtn.onclick = () => signInWithPopup(auth, provider);
+
+    logoutBtn.onclick = () => signOut(auth);
+
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        loginBtn.style.display = "none";
+        userInfo.classList.remove("hidden");
+
+        userName.textContent = user.displayName;
+        userEmail.textContent = user.email;
+        userPhoto.src = user.photoURL;
+
+        document.location = 'dashboard.html'
+ 
+      } else {
+        loginBtn.style.display = "block";
+        userInfo.classList.add("hidden");
+        document.location = 'log_in.html'
+      }
+    });
+  </script>
 
 
-        // signup with google
-        function LogWithGoogle(){
-
-            const auth = getAuth();
-            const provider = new GoogleAuthProvider();
-
-            signInWithPOPup(auth, provider).then((result) => {
-                const user = result.user;
-                console.log("user:", user)
-            })
-            .catch((error) => { 
-                console.log("error signing in")
-            })
-    }
-    
-      </script>
 
 
 
