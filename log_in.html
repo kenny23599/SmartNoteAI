@@ -167,19 +167,19 @@
     
         <!--Signup-->
 
-    <!--Login-->
+<!--Login-->
     <div class="div">
-    <body class="flex flex-col items-center justify-center h-screen bg-gray-100">
-
+    <body class="flex flex-col items-center justify-center h-screen bg-gray-100" id="body">
     <img src="AI NOTE.svg" class="logo">
     <div class="bg-white p-8 rounded shadow w-full max-w-sm text-center">
-
     <h2 class="text-xl font-bold mb-4" id="lgtx">Login with Google</h2>
-
     <button id="loginBtn" class="bg-blue-600 text-white px-4 py-2 rounded mb-4">
       Sign in with Google
     </button>
     </div>
+
+    
+  </div>
 
     <div id="userInfo" class="hidden">
       <img id="userPhoto" class="w-16 h-16 rounded-full mx-auto mb-2" />
@@ -188,7 +188,6 @@
       <button class="button" onclick="document.location ='dashboard.html'">Proceed to dashboard</button>
       <button id="logoutBtn" class="btn">Logout</button>
     </div>
-  </div>
 
 
   <script type="module">
@@ -216,8 +215,8 @@
     const userName = document.getElementById("userName");
     const userEmail = document.getElementById("userEmail");
     const userPhoto = document.getElementById("userPhoto");
-    const logo = document.getElementById('logo');
-    const lgtx = document.getElementById('lgtx');
+    const body = document.getElementById('body');
+    
     
 
     loginBtn.onclick = () => signInWithPopup(auth, provider);
@@ -229,8 +228,8 @@
       if (user) {
         loginBtn.style.display = "none";
         userInfo.classList.remove("hidden");
-        logo.style.display = "none";
-        lgtx.style.display = "none";
+        body.style.display = "none";
+        
 
         userName.textContent = user.displayName;
         userEmail.textContent = user.email;
@@ -241,8 +240,7 @@
       } else {
         loginBtn.style.display = "block";
         userInfo.classList.add("hidden");
-        logo.style.display = "block";
-        lgtx.style.display = "block";
+        body.style.display = "block";
         
       }
     });
