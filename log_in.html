@@ -207,11 +207,11 @@
     const userName = document.getElementById("userName");
     const userEmail = document.getElementById("userEmail");
     const userPhoto = document.getElementById("userPhoto");
-    const dashboard = document.location()
+    const dashboard = document.location
 
     loginBtn.onclick = () => signInWithPopup(auth, provider);
 
-    logoutBtn.onclick = () => signOut(auth);
+    
 
     onAuthStateChanged(auth, user => {
       if (user) {
@@ -222,7 +222,7 @@
         userEmail.textContent = user.email;
         userPhoto.src = user.photoURL;
 
-        
+        dashboard = 'dashboard.html'
  
       } else {
         loginBtn.style.display = "block";
