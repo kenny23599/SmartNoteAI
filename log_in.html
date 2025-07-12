@@ -179,13 +179,15 @@
       <button class="button" onclick="document.location ='dashboard.html'">Proceed to dashboard</button>
       <button id="logoutBtn" class="btn">Logout</button>
     </div>
-    
+
+    <div id="body">
     <img src="AI NOTE.svg" class="logo">
     <div class="bg-white p-8 rounded shadow w-full max-w-sm text-center">
     <h2 class="text-xl font-bold mb-4" id="lgtx">Login with Google</h2>
     <button id="loginBtn" class="bg-blue-600 text-white px-4 py-2 rounded mb-4">
       Sign in with Google
     </button>
+    </div>
     </div>
 
     
@@ -219,6 +221,7 @@
     const userName = document.getElementById("userName");
     const userEmail = document.getElementById("userEmail");
     const userPhoto = document.getElementById("userPhoto");
+    const body = document.getElementById("body");
     
     
     
@@ -237,10 +240,11 @@
         userName.textContent = user.displayName;
         userEmail.textContent = user.email;
         userPhoto.src = user.photoURL;
-
+        body.style.display = "none";
         
  
       } else {
+        body.style.display = "none";
         loginBtn.style.display = "block";
         userInfo.classList.add("hidden");
         
