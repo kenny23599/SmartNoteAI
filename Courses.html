@@ -120,7 +120,7 @@
                 height: 900px;
                 position: absolute;
                 background-color: rgba(0, 0, 0, 0.623);
-                display:block;
+                display:none;
                 overflow: hidden;
                 top: 0%;
                 }
@@ -180,7 +180,7 @@
 
     <div class="blur" id="blur" onclick="blur()">
         <div class="addcourse">
-        <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Courses.html'">
+        <img src="back-svgrepo-com.svg" class="back-icon" onclick="blur()">
         <img src="AI NOTE.svg" class="Mainlogo"><br>
         <form style="margin-top: 10%; " id="form">
             <p><b style=" margin-left: 2%;">Course Title</b></p>
@@ -224,6 +224,19 @@
         </div>
     </div>
 <script>
+
+        function blur(){
+        document.getElementById("blur").style.display = "none";
+        
+        
+        
+        
+    }
+    function AddCourse(){
+        document.getElementById("blur").style.display = "block"
+        
+        
+    }
 
 
     import {
