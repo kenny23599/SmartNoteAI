@@ -151,7 +151,13 @@
                     margin-left: 30%;
                     margin-right: 30%;
                 }
+                .userName{
+                    color: black;
+                    text-align: center;
+                    font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
+            }
+                
 
                 
 </style>
@@ -164,9 +170,11 @@
     <!--Login-->
     <div class="div">
     <body class="flex flex-col items-center justify-center h-screen bg-gray-100">
+
     <img src="AI NOTE.svg" class="logo">
     <div class="bg-white p-8 rounded shadow w-full max-w-sm text-center">
-    <h2 class="text-xl font-bold mb-4">Login with Google</h2>
+
+    <h2 class="text-xl font-bold mb-4" id="lgtx">Login with Google</h2>
 
     <button id="loginBtn" class="bg-blue-600 text-white px-4 py-2 rounded mb-4">
       Sign in with Google
@@ -175,9 +183,10 @@
 
     <div id="userInfo" class="hidden">
       <img id="userPhoto" class="w-16 h-16 rounded-full mx-auto mb-2" />
-      <p><strong>Name:</strong> <span id="userName"></span></p>
-      <p><strong>Email:</strong> <span id="userEmail"></span></p>
-      <button id="logoutBtn" class="mt-4 text-red-500 underline">Logout</button>
+      <p><strong id="userName" > Abdulbadiu Bakare</strong> </p>
+      <p><strong></strong> <span id="userEmail">Abdulbadiubakare12345@gmail.com</span></p>
+      <button class="button" onclick="document.location ='dashboard.html'">Proceed to dashboard</button>
+      <button id="logoutBtn" class="btn">Logout</button>
     </div>
   </div>
 
@@ -207,6 +216,8 @@
     const userName = document.getElementById("userName");
     const userEmail = document.getElementById("userEmail");
     const userPhoto = document.getElementById("userPhoto");
+    const logo = document.getElementById('logo');
+    const lgtx = document.getElementById('lgtx');
     
 
     loginBtn.onclick = () => signInWithPopup(auth, provider);
@@ -218,6 +229,8 @@
       if (user) {
         loginBtn.style.display = "none";
         userInfo.classList.remove("hidden");
+        logo.style.display = "none";
+        lgtx.style.display = "none";
 
         userName.textContent = user.displayName;
         userEmail.textContent = user.email;
@@ -228,6 +241,8 @@
       } else {
         loginBtn.style.display = "block";
         userInfo.classList.add("hidden");
+        logo.style.display = "block";
+        lgtx.style.display = "block";
         
       }
     });
