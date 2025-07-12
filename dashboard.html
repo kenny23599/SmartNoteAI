@@ -172,6 +172,35 @@
             
         </div>
         </div>
+        
+        <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAs-woLjwy4BhQzyutYh8I2h3-jzhe_kY4",
+    authDomain: "smartnote-ai-d2dd1.firebaseapp.com",
+    projectId: "smartnote-ai-d2dd1",
+    storageBucket: "smartnote-ai-d2dd1.appspot.com",
+    messagingSenderId: "982239102580",
+    appId: "1:982239102580:web:0f38bccf724cf6e5a17321",
+    measurementId: "G-79Y1C2GMLC"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Set user name and photo
+      document.getElementById("userName").textContent = user.displayName;
+      document.getElementById("userPhoto").src = user.photoURL;
+    } else {
+      // User not logged in
+      window.location.href = "index.html"; // redirect to login
+    }
+  });
+</script>
 
 
 
