@@ -201,7 +201,7 @@
 
     loginBtn.onclick = () => signInWithPopup(auth, provider);
 
-    logoutBtn.onclick = () => signOut(auth);
+    
 
     onAuthStateChanged(auth, user => {
       if (user) {
