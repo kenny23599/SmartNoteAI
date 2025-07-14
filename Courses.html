@@ -217,67 +217,87 @@
         </div>
 
         <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { query, where } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAs-woLjwy4BhQzyutYh8I2h3-jzhe_kY4",
+        authDomain: "smartnote-ai-d2dd1.firebaseapp.com",
+        projectId: "smartnote-ai-d2dd1",
+        storageBucket: "smartnote-ai-d2dd1.firebasestorage.app",
+        messagingSenderId: "982239102580",
+        appId: "1:982239102580:web:0f38bccf724cf6e5a17321",
+        measurementId: "G-79Y1C2GMLC"       
+};
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+    const db = getFirestore(app);
     
-        const firebaseConfig = {
-            apiKey: "AIzaSyAs-woLjwy4BhQzyutYh8I2h3-jzhe_kY4",
-            authDomain: "smartnote-ai-d2dd1.firebaseapp.com",
-            projectId: "smartnote-ai-d2dd1",
-            storageBucket: "smartnote-ai-d2dd1.firebasestorage.app",
-            messagingSenderId: "982239102580",
-            appId: "1:982239102580:web:0f38bccf724cf6e5a17321",
-            measurementId: "G-79Y1C2GMLC"       
-        };
+  // ⬇️ Call this to save data
+    async function saveNote(title, summary) {
+        const user = auth.currentUser;
+        if (!user) return alert("Please log in first");
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-        const db = getFirestore(app);
-    
-      // ⬇️ Call this to save data
-        async function saveNote(title, summary) {
-            try {
-            await addDoc(collection(db, "summaries"), {
-                title: title,
-                 summary: summary,
-                timestamp: new Date()
-            });
-                alert("Summary saved!");
-                document.location='Courses.html'
-            } catch (e) {
-                console.error("Error adding document: ", e);
-            
-            }
-         }
+        const fileInput = document.getElementById("noteFile");
+        const file = fileInput.files[0];
+        let fileURL = null;
 
-      // ⬇️ Call this to get and display data
-        async function getAllNotes() {
-            const querySnapshot = await getDocs(collection(db, "summaries"));
-            let output = '';
-            querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            output += `
+        if (file) {
+        const storageRef = ref(storage, `user_uploads/${user.uid}/${Date.now()}_${file.name}`);
+        const snapshot = await uploadBytes(storageRef, file);
+        fileURL = await getDownloadURL(snapshot.ref);
+    }
 
-            <div class="container" id="uploadsList">
+    await addDoc(collection(db, "summaries"), {
+        uid: user.uid, // 🔐 Save user's ID
+        title,
+        summary,
+        fileURL,
+        timestamp: new Date()
+    });
+
+    alert("Note saved!");
+    getAllNotes(); // Refresh list
+    }
+     
+
+    // ⬇️ Call this to get and display data
+     async function getAllNotes() {
+            const user = auth.currentUser;
+    if (!user) return;
+
+    const q = query(collection(db, "summaries"), where("uid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    let output = '';
+
+        querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        output += `
+        <div class="container" id="uploadsList">
              <p class="p"><b>${data.title}</b></p><span class="span">${data.summary}</span>
             </div>
-    
-          `;
-            });
-            document.getElementById("noteList").innerHTML = output;
-        }
+    `;
+  });
 
-      // Example event listener to save data
-         document.getElementById("saveBtn").addEventListener("click", () => {
-            const title = document.getElementById("noteTitle").value;
-            const summary = document.getElementById("noteContent").value;
-            saveNote(title, summary);
-        });
+  document.getElementById("noteList").innerHTML = output;
+}
 
-      // Load notes on page load
-        getAllNotes();
+  // Example event listener to save data
+     document.getElementById("saveBtn").addEventListener("click", () => {
+        const title = document.getElementById("noteTitle").value;
+        const summary = document.getElementById("noteContent").value;
+        saveNote(title, summary);
+    });
+
+  // Load notes on page load
+    getAllNotes();
 
 </script>
 
