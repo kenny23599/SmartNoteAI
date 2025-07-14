@@ -118,6 +118,64 @@
           });
       }
     </script>
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAs-woLjwy4BhQzyutYh8I2h3-jzhe_kY4",
+    authDomain: "smartnote-ai-d2dd1.firebaseapp.com",
+    projectId: "smartnote-ai-d2dd1",
+    storageBucket: "smartnote-ai-d2dd1.appspot.com",
+    messagingSenderId: "982239102580",
+    appId: "1:982239102580:web:0f38bccf724cf6e5a17321",
+    measurementId: "G-79Y1C2GMLC"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // ⬇️ Call this to save data
+  async function saveNote(title, summary) {
+    try {
+      await addDoc(collection(db, "summaries"), {
+        title: title,
+        summary: summary,
+        timestamp: new Date()
+      });
+      alert("Summary saved!");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+
+  // ⬇️ Call this to get and display data
+  async function getAllNotes() {
+    const querySnapshot = await getDocs(collection(db, "summaries"));
+    let output = '';
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      output += `
+        <div class="p-4 border mb-2 rounded">
+          <h3 class="font-bold">${data.title}</h3>
+          <p>${data.summary}</p>
+        </div>
+      `;
+    });
+    document.getElementById("noteList").innerHTML = output;
+  }
+
+  // Example event listener to save data
+  document.getElementById("saveBtn").addEventListener("click", () => {
+    const title = document.getElementById("noteTitle").value;
+    const summary = document.getElementById("noteContent").value;
+    saveNote(title, summary);
+  });
+
+  // Load notes on page load
+  getAllNotes();
+</script>
+
 <body class="body">
     <div class="div">
     <img src="woman.png" class="illustration">
