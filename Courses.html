@@ -261,8 +261,9 @@
             const data = doc.data();
             output += `
 
-            <div class="container" id="uploadsList" onclick="deleteNote('${doc}')">
+            <div class="container" id="uploadsList">
              <p class="p"><b>${data.title}</b></p><span class="span">${data.summary}</span>
+             <button onclick="deleteNote('${doc.id}')" class="text-red-500">🗑 Delete</button>
             </div>
     
           `;
