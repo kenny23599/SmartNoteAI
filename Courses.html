@@ -178,29 +178,26 @@
 </style>
 <body class="body">
 
-    <div class="blur" id="blur" onclick="blur()">
+    <div class="blur" id="blur">
         <div class="addcourse">
-        <img src="back-svgrepo-com.svg" class="back-icon" onclick="blur()">
+        <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Courses.html'">
         <img src="AI NOTE.svg" class="Mainlogo"><br>
-        <form style="margin-top: 10%; " id="form">
             <p><b style=" margin-left: 2%;">Course Title</b></p>
             <input type="text" placeholder="course title" class="text" id="noteTitle">
-            <textarea id="noteContent" placeholder="Enter summary..." class="border w-full mb-2 p-2 rounded"></textarea> 
-            <input type="file" accept=".pdf" class="hidden" id="noteFile" "required >
-            
+            <textarea id="noteContent" placeholder="Enter summary..." class="border w-full mb-2 p-2 rounded"></textarea>
+            <div style="margin-left: 2%;" id="customButton"> 
             </div>
             <button id="saveBtn" class="button">Add Course</button>
-        </form>
         
         </div>
     </div>
     
 
     <div class="div" id="div">
-        <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='dashboard.html'">
+        <img src="back-svgrepo-com.svg" class="back-icon" >
         <img src="AI NOTE.svg" class="logo"><br>
         <h1 class="h1">Course</h1>
-        <button class="button" onclick="AddCourse()">Add Course</button>
+        <button class="button" onclick="document.getElementById('blur').style.display = 'block'">Add Course</button>
 
         <div style="display: flex; flex-wrap:wrap;">
             <div class="container" id="uploadsList">
@@ -211,7 +208,6 @@
             <div class="container" id="uploadsList">
                 <p class="p"><b>MTH101</b></p><span class="span">Summary History</span>
             </div>
-            <div id="noteList"></div>
 
         </div>
 
@@ -222,145 +218,52 @@
             <div><img src="inbox-svgrepo-com (1) BLUE.svg" class="nav-icon" onclick="document.location = 'Courses.html'"></div>
             
         </div>
-    </div>
+
 <script>
-
-        function blur(){
-        document.getElementById("blur").style.display = "none";
-        
-        
-        
-        
-    }
-    function AddCourse(){
-        document.getElementById("blur").style.display = "block"
-        
-        
-    }
-
-
-    import {
-      getStorage,
-      ref,
-      uploadBytes,
-      getDownloadURL
-    } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-      import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-
- const firebaseConfig = {
-    apiKey: "AIzaSyAs-woLjwy4BhQzyutYh8I2h3-jzhe_kY4",
-    authDomain: "smartnote-ai-d2dd1.firebaseapp.com",
-    projectId: "smartnote-ai-d2dd1",
-    storageBucket: "smartnote-ai-d2dd1.appspot.com",
-    messagingSenderId: "982239102580",
-    appId: "1:982239102580:web:0f38bccf724cf6e5a17321",
-    measurementId: "G-79Y1C2GMLC"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-    rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /summaries/{docId} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
-
+    
   // ⬇️ Call this to save data
-  async function saveNote(title, summary) {
-    try {
-      await addDoc(collection(db, "summaries"), {
-        title: title,
-        summary: summary,
-        timestamp: new Date()
-      });
-      alert("Summary saved!");
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  }
+    async function saveNote(title, summary) {
+        try {
+        await addDoc(collection(db, "summaries"), {
+            title: title,
+             summary: summary,
+            timestamp: new Date()
+        });
+            alert("Summary saved!");
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+     }
 
   // ⬇️ Call this to get and display data
-  async function getAllNotes() {
-    const querySnapshot = await getDocs(collection(db, "summaries"));
-    let output = '';
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      output += `
-        <div class="p-4 border mb-2 rounded">
-          <h3 class="font-bold">${data.title}</h3>
-          <p>${data.summary}</p>
-        </div>
+    async function getAllNotes() {
+        const querySnapshot = await getDocs(collection(db, "summaries"));
+        let output = '';
+        querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        output += `
+
+        <div class="container" id="uploadsList">
+                <p class="p"><b>${data.title}</b></p><span class="span">${data.summary}</span>
+            </div>
       `;
-    });
-    document.getElementById("noteList").innerHTML = output;
-  }
+        });
+        document.getElementById("noteList").innerHTML = output;
+    }
 
   // Example event listener to save data
-  document.getElementById("saveBtn").addEventListener("click", () => {
-    const title = document.getElementById("noteTitle").value;
-    const summary = document.getElementById("noteContent").value;
-    saveNote(title, summary);
-  });
+     document.getElementById("saveBtn").addEventListener("click", () => {
+        const title = document.getElementById("noteTitle").value;
+        const summary = document.getElementById("noteContent").value;
+        saveNote(title, summary);
+    });
 
   // Load notes on page load
-  getAllNotes();
-
-// Setup
-const storage = getStorage(app);
-
-// Function to save data + file
-async function saveNote(title, summary) {
-  const fileInput = document.getElementById("noteFile");
-  const file = fileInput.files[0];
-
-  let fileURL = null;
-
-  if (file) {
-    const storageRef = ref(storage, `user_uploads/${Date.now()}_${file.name}`);
-    const snapshot = await uploadBytes(storageRef, file);
-    fileURL = await getDownloadURL(snapshot.ref);
-  }
-
-  await addDoc(collection(db, "summaries"), {
-    title: title,
-    summary: summary,
-    fileURL: fileURL,
-    fileName: file ? file.name : null,
-    timestamp: new Date()
-  });
-
-  alert("Saved with file!");
-  getAllNotes(); // Refresh list
-}
-
-    async function getAllNotes() {
-  const querySnapshot = await getDocs(collection(db, "summaries"));
-  let output = '';
-
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    output += `
-      <div class="p-4 border mb-2 rounded bg-white shadow">
-        <h3 class="font-bold">${data.title}</h3>
-        <p class="mb-2">${data.summary}</p>
-        ${data.fileURL ? `<a href="${data.fileURL}" target="_blank" class="text-blue-500 underline">📄 View Uploaded File</a>` : ''}
-      </div>
-    `;
-  });
-
-  document.getElementById("noteList").innerHTML = output;
-}
-
-    
+    getAllNotes();
 
 </script>
-           
-    
+
+
 
 
 
