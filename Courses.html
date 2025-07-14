@@ -24,7 +24,7 @@
             .div{
                 margin-top: 10%;
                 display: block;
-                overflow-y: scroll;
+                
             }
 
             .h1{
@@ -200,7 +200,7 @@
         <h1 class="h1">Course</h1>
         <button class="button" onclick="document.getElementById('blur').style.display = 'block'">Add Course</button>
 
-        <div style="display: flex; flex-wrap:wrap;" id="noteList">
+        <div style="display: flex; flex-wrap:wrap; overflow-y: scroll; height: 500px; " id="noteList">
             <div class="container" id="uploadsList">
                 <p class="p" id="Course"><b >CSC101</b></p>
                 <span class="span" id="filename">Summary History</span>
@@ -209,7 +209,7 @@
             <div class="container" id="uploadsList">
                 <p class="p"><b>MTH101</b></p><span class="span">Summary History</span>
             </div>
-            <div ></div>
+            
 
         </div>
 
