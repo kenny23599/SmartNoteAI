@@ -278,16 +278,17 @@
             saveNote(title, summary);
         });
       // Load notes on page load
-        getAllNotes();
+        
 
                         //delete Course
             async function deleteNote(noteId) {
               if (confirm("Delete this note?")) {
                 await deleteDoc(doc(db, "summaries", noteId));
                 alert("Note deleted");
-            getAllNotes(); // Refresh list
+            // Refresh list
           }
         }
+            getAllNotes();
 
 </script>
 
