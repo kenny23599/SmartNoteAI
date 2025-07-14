@@ -195,7 +195,7 @@
     
 
     <div class="div" id="div">
-        <img src="back-svgrepo-com.svg" class="back-icon" >
+        <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Courses.html'" >
         <img src="AI NOTE.svg" class="logo"><br>
         <h1 class="h1">Course</h1>
         <button class="button" onclick="document.getElementById('blur').style.display = 'block'">Add Course</button>
@@ -203,6 +203,8 @@
         <div style="display: flex; flex-wrap:wrap; overflow-y: scroll; height: 500px; " id="noteList">
     
         </div>
+
+        
 
         <div class="navbar">
             <div><img src="profile-svgrepo-com.svg" class="nav-icon" onclick="document.location = 'dashboard.html'"></div>
@@ -243,6 +245,7 @@
             alert("Summary saved!");
         } catch (e) {
             console.error("Error adding document: ", e);
+            onclick="document.location='Courses.html'"
         }
      }
 
