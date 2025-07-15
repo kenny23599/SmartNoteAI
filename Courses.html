@@ -86,8 +86,13 @@
             }
 
             .span{
+                display: flex;
+                flex-wrap: wrap;
                 color: rgb(187, 187, 187);
                 margin-left: 5%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             .navbar{
@@ -345,7 +350,7 @@
 
             <div class="container" id="uploadsList">
              <p class="p"><b>${data.title}</b></p><span class="span">${data.summary}</span>
-             <button onclick="deleteNote('${doc.id}')" class="text-red-500">🗑</button>
+             
             </div>
     
           `;
