@@ -374,23 +374,25 @@
 
 </script>
 <script>
-  function showLoader() {
-    document.getElementById("courseLoader").style.display = "flex";
-  }
+    function showLoader() {
+      const loader = document.getElementById("courseLoader");
+      loader.style.display = "flex";
+    }
 
-  function hideLoader() {
-    document.getElementById("courseLoader").style.display = "none";
-  }
+    function hideLoader() {
+      const loader = document.getElementById("courseLoader");
+      loader.style.display = "none";
+    }
 
-  // Simulate fetch on load
-  window.onload = function () {
-    showLoader();
+    window.onload = function () {
+      showLoader();
 
-    setTimeout(() => {
-      hideLoader();
-      
-    }, 2000);
-  };
-</script>
+      // simulate loading for 2 seconds
+      setTimeout(() => {
+        hideLoader();
+        document.getElementById("courseContent").innerText = "✅ Course content loaded successfully!";
+      }, 2000);
+    };
+  </script>
 </body>
 </html>
