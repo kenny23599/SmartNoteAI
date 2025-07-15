@@ -104,6 +104,8 @@
                 font-family: 'Lato', sans-serif;
                 font-size: 15px;
                 margin-top: 20px;
+                position: fixed;
+                bottom: 90px;
                 
             }
 
@@ -138,16 +140,16 @@
     
 
     <div class="div" id="div">
-        <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='dashboard.html'">
+        <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Dashboard.html'">
         <img src="AI NOTE.svg" class="logo"><br>
         <h1 class="h1">Ask AI..</h1>
-        <input type="text" class="textAi" placeholder="Ask Quenstion about your Courses" id="prompt">
-
+        <input type="text" class="textAi" placeholder="Ask Quenstion about your Courses" id="userInput">
         <div style="display: flex; flex-wrap:wrap;">
-            <div class="container">
-                <p class="p" id="response">Ai Answer..</p>
-            </div>
-        <button type="submit" id="button" onclick="sendPrompt()" class="button">Ask Ai</button>
+
+            <div id="loading" class="container">Thinking...</div>
+            <div id="aiResponse" class="p"></div>
+        <button type="submit" id="button" onclick="askAI()" class="button">Ask Ai</button>  
+        
 
         </div>
 
@@ -159,23 +161,45 @@
             
         </div>
 
-
-
     </div>
-    <script>
-        async function sendPrompt() {
-          const prompt = document.getElementById('prompt').value;
+
+<script>
+async function askAI() {
+  const userQuestion = document.getElementById("userInput").value.trim();
+  const responseBox = document.getElementById("aiResponse");
+  const loader = document.getElementById("loading");
+
+  if (!userQuestion) return;
+
+  responseBox.innerText = "";
+  loader.classList.remove("hidden");
+
+  try {
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "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" // ⚠️ Replace this!
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: userQuestion }],
+        temperature: 0.7
+      })
+    });
+
+    const data = await res.json();
+    const answer = data.choices[0].message.content;
+    responseBox.innerText = answer;
+  } catch (err) {
+    responseBox.innerText = "⚠️ Something went wrong. Try again.";
+    console.error(err);
+  }
+
+  loader.classList.add("hidden");
+}
+</script>
     
-          const response = await fetch('/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt })
-          });
-    
-          const data = await response.json();
-          document.getElementById('response').innerText = data.reply;
-        }
-      </script>
     
 
     
