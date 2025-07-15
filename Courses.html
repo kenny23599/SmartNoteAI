@@ -269,6 +269,29 @@
             <div><img src="inbox-svgrepo-com (1) BLUE.svg" class="nav-icon" onclick="document.location = 'Courses.html'"></div>
             
         </div>
+<script>
+    function showLoader() {
+        document.getElementById("courseLoader").style.display = "flex";
+        }
+
+        function hideLoader() {
+        document.getElementById("courseLoader").style.display = "none";
+        }
+
+
+        async function loadCourse() {
+            showLoader();
+
+            // Simulated delay
+            setTimeout(() => {
+                hideLoader();
+                document.getElementById("courseContent").innerText = "Course content loaded successfully!";
+            }, 2000);
+            }
+
+            window.onload = loadCourse;
+
+</script>
 
 <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
@@ -343,29 +366,6 @@
           }
         }
             
-
-</script>
-<script>
-    function showLoader() {
-        document.getElementById("courseLoader").style.display = "flex";
-        }
-
-        function hideLoader() {
-        document.getElementById("courseLoader").style.display = "none";
-        }
-
-
-        async function loadCourse() {
-            showLoader();
-
-            // Simulated delay
-            setTimeout(() => {
-                hideLoader();
-                document.getElementById("courseContent").innerText = "Course content loaded successfully!";
-            }, 2000);
-            }
-
-            window.onload = loadCourse;
 
 </script>
 
