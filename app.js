@@ -1,52 +1,43 @@
-//auto text writting
-/*  
+  // Animate loading dots
+    let dotCount = 0;
+    setInterval(() => {
+      const dots = document.querySelector(".dots");
+      if (dots) {
+        dotCount = (dotCount + 1) % 4;
+        dots.textContent = ".".repeat(dotCount);
+      }
+    }, 500);
 
-/*<script>
-    const text = "";
-    const speed = 100;
+    // Hide loader after page loads
+    window.addEventListener("load", () => {
+      document.body.classList.remove("loading");
+      const loader = document.getElementById("smartnoteLoader");
+      if (loader) loader.style.display = "none";
+    });
 
-    let i = 0
+    // Example function to show loader during a fake async operation
+    function triggerAction() {
+      const loader = document.getElementById("smartnoteLoader");
+      if (loader) loader.style.display = "flex";
 
-    function typescript(){
-        if(i < text.length){
-            document.getElementsById("p").textContent += text.charAt(i);
-            i++;
-            setTimeout(p, speed);
-        }
+      // Simulate a fetch request delay
+      setTimeout(() => {
+        if (loader) loader.style.display = "none";
+        alert("SmartNote AI has completed the task!");
+      }, 3000);
     }
 
-    typescript()
-</script>*/
+    // Optional: auto-show loader on all fetch() calls
+    const originalFetch = window.fetch;
+    window.fetch = async (...args) => {
+      const loader = document.getElementById("smartnoteLoader");
+      if (loader) loader.style.display = "flex";
 
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(function(registration) {
-            console.log('Service Worker registered with scope:', registration.scope);
-          })
-          .catch(function(error) {
-            console.error('Service Worker registration failed:', error);
-          });
+      try {
+        const result = await originalFetch(...args);
+        return result;
+      } finally {
+        if (loader) loader.style.display = "none";
       }
+    };
 
-
-      // Function to request permission for notifications and display a notification
-function showNotification() {
-  // Check if the browser supports the Notification API
-  if (!("Notification" in window)) {
-    alert("This browser does not support desktop notification");
-  } else if (Notification.permission === "granted") {
-    // If permission has already been granted, create and display the notification
-    var notification = new Notification("Alert!", { body: "This is a mobile alert notification." });
-  } else if (Notification.permission !== "denied") {
-    // If permission has not been denied, request permission for notifications
-    Notification.requestPermission().then(function (permission) {
-      // If permission is granted, create and display the notification
-      if (permission === "granted") {
-        var notification = new Notification("Alert!", { body: "This is a mobile alert notification." });
-      }
-      Notification = alert('refresh for new notification')
-    });
-  }
-}
- 
-showNotification();
