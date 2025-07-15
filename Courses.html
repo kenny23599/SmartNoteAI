@@ -226,30 +226,31 @@
 
             .simple-loader {
                 display: none;
-                margin-top: 10px;
-                font-size: 14px;
+                margin-top: 12px;
+                font-size: 15px;
                 font-style: italic;
-                color: #3a3838;
+                color: #333;
+                display: flex;
                 align-items: center;
-                gap: 6px;
+                justify-content: flex-start;
                 margin-left: 30%;
-                }
+            }
 
-                .simple-loader .spinner {
-                width: 14px;
-                height: 14px;
+            .spinner {
+                width: 16px;
+                height: 16px;
+                margin-right: 8px;
                 border: 2px solid #ccc;
                 border-top: 2px solid #007bff;
                 border-radius: 50%;
-                animation: spin 0.8s linear infinite;
-                }
+                animation: spin 1s linear infinite;
+            }
 
-                @keyframes spin {
+            @keyframes spin {
                 to {
-                    transform: rotate(360deg);
+                transform: rotate(360deg);
                 }
-
-                }
+            }
 </style>
 <body class="body">
 
@@ -269,7 +270,7 @@
     
 
     <div class="div" id="div">
-        <img src="back-svgrepo-com.svg" class="back-icon" >
+        <img src="back-svgrepo-com.svg" class="back-icon"  onclick="document.location='dashboard.html'" >
         <img src="AI NOTE.svg" class="logo"><br>
         <h1 class="h1">Course</h1>
         <button class="button" onclick="document.getElementById('blur').style.display = 'block'">Add Course</button>
