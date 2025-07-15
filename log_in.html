@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="website icon" href="AI NOTE.svg" type="svg">
     <title>SmartNote | Log in</title>
-    <script src="auth.js"></script>
+    <script src="app.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <style>
     .div{
@@ -182,11 +183,7 @@
 
                 
 </style>
-<script src="https://cdn.tailwindcss.com"></script>
-<body class ="main-body">
-    
-    
-        <!--Signup-->
+
 
 <!--Login-->
     <div class="div">
@@ -242,6 +239,28 @@
     </div>
     </div>
     </div>
+
+<!-- 🔄 Global Loading Overlay -->
+<div class="loading">
+  <!-- 🔵 SmartNote AI Loader -->
+  <div id="smartnoteLoader" class="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
+    <div class="flex flex-col items-center">
+      <!-- Logo -->
+      <img src="https://kenny23599.github.io/SmartNoteAI/assets/logo.png" alt="SmartNote AI Logo" class="w-12 h-12 mb-3 animate-bounce" />
+
+      <!-- Spinner -->
+      <svg class="animate-spin h-8 w-8 text-blue-600 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+        <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.4 0 0 5.4 0 12h4z" />
+      </svg>
+
+      <!-- Loading Text -->
+      <p class="text-blue-700 font-medium animate-pulse tracking-wide">
+        SmartNote AI is loading<span class="dots">...</span>
+      </p>
+    </div>
+  </div>
 
     
 
