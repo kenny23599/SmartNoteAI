@@ -368,19 +368,21 @@
             const data = doc.data();
             output += `
 
+            
+            <div onclick="document.getElementById('Noteblur').style.display ='block'">
+             <div class="container" id="uploadsList">
+             <p class="p"><b>${data.title}</b></p><span class="span">${data.summary}</span>
+            </div>
+            </div>
+
+            
             <div>
+            <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Courses.html'">
             <div class="Noteblur" id="Noteblur">
             <div class="note">
                 <h1 class="h1">Title:${data.title}</h1>
                 <p class="p">${data.summary}</p>
             </div>
-            </div>
-            </div>
-
-            
-            <div onclick="document.getElementById('Noteblur').style.display ='block'">
-             <div class="container" id="uploadsList">
-             <p class="p"><b>${data.title}</b></p><span class="span">${data.summary}</span>
             </div>
             </div>
 
