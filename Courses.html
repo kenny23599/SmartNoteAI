@@ -310,7 +310,14 @@
     </div>
 
         <div style="height: 500px; overflow-y: scroll;" id="noteList">
-    
+            
+            <div>
+            <div class="Noteblur" id="Noteblur">
+            <div class="note">
+                <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Courses.html'">
+                <h1 class="h1">Title: ${data.title}</h1>
+                <p class="p">${data.summary}</p>
+            </div>
         </div>
 
 
@@ -378,13 +385,7 @@
             </div>
 
 
-            <div>
-            <div class="Noteblur" id="Noteblur">
-            <div class="note">
-                <img src="back-svgrepo-com.svg" class="back-icon" onclick="document.location='Courses.html'">
-                <h1 class="h1">Title: ${data.title}</h1>
-                <p class="p">${data.summary}</p>
-            </div>
+
             </div>
     
           `;
