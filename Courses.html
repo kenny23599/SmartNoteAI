@@ -368,14 +368,6 @@
             const data = doc.data();
             output += `
 
-            
-            <div onclick="document.getElementById('Noteblur').style.display ='block'">
-             <div class="container" id="uploadsList">
-             <p class="p"><b>${data.title}</b></p><span class="span">${data.summary}</span>
-            </div>
-            </div>
-
-
             <div>
             <div class="Noteblur" id="Noteblur">
             <div class="note">
@@ -383,8 +375,15 @@
                 <p class="p">${data.summary}</p>
             </div>
             </div>
+            </div>
 
-    
+            
+            <div onclick="document.getElementById('Noteblur').style.display ='block'">
+             <div class="container" id="uploadsList">
+             <p class="p"><b>${data.title}</b></p><span class="span">${data.summary}</span>
+            </div>
+            </div>
+
           `;
             });
             document.getElementById("noteList").innerHTML = output;
